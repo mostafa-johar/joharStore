@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: "Poppins", sans-serif
+}
+.container{
+    @apply mx-auto p-3 
+}
+/* --- Header & Footer -- */
+.box_header , .box_footer {
+    @apply bg-neutral-100/50 z-[2] backdrop-blur-md;
+  }
+.box_header{
+    @apply  w-full fixed top-0 left-0
+}  
