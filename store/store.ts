@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { onMounted ,watch } from "vue";
+import { onMounted ,onUpdated,watch } from "vue";
 export const useProductStore = defineStore("products", () => {
   // ======== Start interface =============
   interface product {
@@ -135,16 +135,17 @@ onMounted(()=>{
     let strCart = getItem('shoppingCart') as string
     let x = JSON.parse(strCart)  
     Cart.value = x
-    count.value = Cart.value.length
   }
   watch(
     Cart,
     (val) => {
       setItem('shoppingCart',JSON.stringify(val))
+      count.value = Cart.value.length
     },
     { deep: true }
   )
 })
+
 
 // ============ Start local Storge for product ===============
 
@@ -170,14 +171,10 @@ function setItem(item :string, value:string) {
 // -------- remove product to cart
 function removeFromCart(index:number){
   Cart.value =  Cart.value.filter((item)=>{
-    if(item.amount>1){
-      count.value--
-      return
-    }
      return item !== Cart.value[index]
   })
-  // console.log(e.target)
-  count.value--
+  
+  
 }
   return {
     AllProducts,
